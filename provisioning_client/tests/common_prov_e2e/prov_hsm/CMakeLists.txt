@@ -14,19 +14,19 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(IOT_HSM_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/deps/hsm/inc)
 
-include_directories(. ${IOT_HSM_INCLUDE_DIR} ${UTPM_INCLUDE_DIR} ../../../adapters)
+include_directories(${CMAKE_CURRENT_LIST_DIR} ${IOT_HSM_INCLUDE_DIR} ${UTPM_INCLUDE_DIR} ../../../adapters)
 
 set(source_c_files
-    ./tpm_msr.c
-    ./x509_msr.c
-    ./symm_key.c
-    ./provisioning_hsm.c
+    ${CMAKE_CURRENT_LIST_DIR}/tpm_msr.c
+    ${CMAKE_CURRENT_LIST_DIR}/x509_msr.c
+    ${CMAKE_CURRENT_LIST_DIR}/symm_key.c
+    ${CMAKE_CURRENT_LIST_DIR}/provisioning_hsm.c
 )
 
 set(source_h_files
-    ./tpm_msr.h
-    ./x509_info.h
-    ./symm_key.h
+    ${CMAKE_CURRENT_LIST_DIR}/tpm_msr.h
+    ${CMAKE_CURRENT_LIST_DIR}/x509_info.h
+    ${CMAKE_CURRENT_LIST_DIR}/symm_key.h
 )
 
 IF(WIN32)
@@ -43,5 +43,9 @@ ENDIF(WIN32)
 
 add_library(prov_hsm ${source_c_files} ${source_h_files})
 target_link_libraries(prov_hsm msr_riot utpm)
+target_include_directories(prov_hsm
+    PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}
+)
 
 set_target_properties(prov_hsm PROPERTIES FOLDER "tests/azure_prov_e2e_tests")
