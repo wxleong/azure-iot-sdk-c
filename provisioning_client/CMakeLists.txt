@@ -147,6 +147,15 @@ add_library(hsm_security_client
 
 applyXcodeBuildFlagsIfNeeded(hsm_security_client)
 
+# Install target and set target include directory
+install(TARGETS hsm_security_client
+    EXPORT azure_prov_sdkTargets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/azureiot
+)
+
 set(PROV_DEVICE_CLIENT_SOURCE_C_FILES
     ${CMAKE_CURRENT_LIST_DIR}/src/prov_device_client.c)
 
@@ -215,42 +224,23 @@ if(${use_prov_client} OR (${use_prov_client_core} AND ${run_e2e_tests}))
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/inc>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     )
+endif()
 
-add_library(hsm_security_client ${HSM_CLIENT_C_FILES} ${HSM_CLIENT_H_FILES})
-applyXcodeBuildFlagsIfNeeded(hsm_security_client)
-linkSharedUtil(hsm_security_client)
-target_link_libraries(hsm_security_client ${HSM_CLIENT_LIBRARY})
-set(provisioning_libs ${provisioning_libs} hsm_security_client)
 set(provisioning_headers ${provisioning_headers} ${HSM_CLIENT_H_FILES})
-
-add_library(prov_auth_client ${AUTH_CLIENT_C_FILES} ${AUTH_CLIENT_H_FILES})
-applyXcodeBuildFlagsIfNeeded(prov_auth_client)
-linkSharedUtil(prov_auth_client)
-target_link_libraries(prov_auth_client hsm_security_client)
 set(provisioning_libs ${provisioning_libs} prov_auth_client)
 set(provisioning_headers ${provisioning_headers} ${AUTH_CLIENT_H_FILES})
 
 if(${use_prov_client} OR (${use_prov_client_core} AND ${run_e2e_tests}))
-    add_library(prov_device_ll_client ${PROV_DEVICE_LL_CLIENT_SOURCE_C_FILES} ${PROV_DEVICE_LL_CLEINT_SOURCE_H_FILES})
-    applyXcodeBuildFlagsIfNeeded(prov_device_ll_client)
-    linkSharedUtil(prov_device_ll_client)
-    link_security_client(prov_device_ll_client)
-    set(provisioning_libs ${provisioning_libs} prov_device_ll_client)
-    set(provisioning_headers ${provisioning_headers} ${PROV_DEVICE_LL_CLEINT_SOURCE_H_FILES})
-    target_link_libraries(prov_device_ll_client parson)
-
     add_library(prov_device_client ${PROV_DEVICE_CLIENT_SOURCE_C_FILES} ${PROV_DEVICE_CLIENT_SOURCE_H_FILES})
     applyXcodeBuildFlagsIfNeeded(prov_device_client)
-    target_link_libraries(prov_device_client  prov_device_ll_client)
     set(provisioning_libs ${provisioning_libs} prov_device_client)
     set(provisioning_headers ${provisioning_headers} ${PROV_DEVICE_CLIENT_SOURCE_H_FILES})
-    target_link_libraries(prov_device_client parson)
 
     applyXcodeBuildFlagsIfNeeded(prov_device_client)
     target_link_libraries(prov_device_client
         PUBLIC
             prov_device_ll_client
-            parson::parson
+            parson
     )
 
     if (${build_as_dynamic})
@@ -373,20 +363,8 @@ if(${use_prov_client} OR (${use_prov_client_core} AND ${run_e2e_tests}))
             ${CMAKE_CURRENT_LIST_DIR}/src/prov_transport_amqp_ws_client.c
             ${CMAKE_CURRENT_LIST_DIR}/src/prov_transport_amqp_common.c
             ${CMAKE_CURRENT_LIST_DIR}/src/prov_sasl_tpm.c)
-
-        add_library(prov_amqp_ws_transport ${PROV_AMQP_WS_CLIENT_C_FILES} ${PROV_AMQP_WS_CLIENT_H_FILES})
-        applyXcodeBuildFlagsIfNeeded(prov_amqp_ws_transport)
-        linkSharedUtil(prov_amqp_ws_transport)
-        target_link_libraries(prov_amqp_ws_transport uamqp)
-        set(provisioning_libs ${provisioning_libs} prov_amqp_ws_transport)
         set(provisioning_headers ${provisioning_headers} ${PROV_AMQP_WS_CLIENT_H_FILES})
 
-        # Provisioning amqp Transport Client library
-        add_library(prov_amqp_transport ${PROV_AMQP_CLIENT_C_FILES} ${PROV_AMQP_CLIENT_H_FILES})
-        applyXcodeBuildFlagsIfNeeded(prov_amqp_transport)
-        linkSharedUtil(prov_amqp_transport)
-        target_link_libraries(prov_amqp_transport uamqp)
-        set(provisioning_libs ${provisioning_libs} prov_amqp_transport)
         set(provisioning_headers ${provisioning_headers} ${PROV_AMQP_CLIENT_H_FILES})
     endif()
 
