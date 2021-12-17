@@ -57,7 +57,7 @@ elseif (${use_prov_client})
 endif()
 
 ##### Set Include directories for RIoT #####
-if (${use_prov_client})
+if (${use_prov_client} AND NOT ${hsm_type_custom})
     if (${run_e2e_tests})
         # For e2e test we need to run a custom HSM to handle testing
         # TODO: Remove once utpm CMake is updated
@@ -145,6 +145,24 @@ add_library(hsm_security_client
     $<$<BOOL:${hsm_type_x509}>:${CMAKE_CURRENT_LIST_DIR}/adapters/hsm_client_riot.c>
 )
 
+target_include_directories(hsm_security_client
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/adapter>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/azureiot>
+)
+
+target_compile_definitions(hsm_security_client
+    PUBLIC
+        $<$<BOOL:${hsm_type_x509}>:RIOTSECP256R1 RIOTBUILD>
+)
+
+target_link_libraries(hsm_security_client
+    PUBLIC
+      utpm
+      msr_riot
+      parson
+)
+
 applyXcodeBuildFlagsIfNeeded(hsm_security_client)
 
 # Install target and set target include directory
@@ -224,6 +242,13 @@ if(${use_prov_client} OR (${use_prov_client_core} AND ${run_e2e_tests}))
         $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/inc>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     )
+
+    target_link_libraries(prov_device_ll_client
+        PUBLIC
+            parson
+            prov_auth_client
+    )
+
 endif()
 
 set(provisioning_headers ${provisioning_headers} ${HSM_CLIENT_H_FILES})

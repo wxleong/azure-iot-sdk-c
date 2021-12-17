@@ -132,7 +132,7 @@ else()
         set(run_e2e_tests OFF)
         set(run_unittests OFF)
 
-        add_subdirectory(./utpm)
+        add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/utpm)
 
         set(run_e2e_tests ${original_run_e2e_tests})
         set(run_unittests ${original_run_unittests})
