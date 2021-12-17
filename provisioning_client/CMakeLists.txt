@@ -161,6 +161,8 @@ target_link_libraries(hsm_security_client
       utpm
       msr_riot
       parson
+      uhttp
+      ${CUSTOM_HSM_LIB}
 )
 
 applyXcodeBuildFlagsIfNeeded(hsm_security_client)
@@ -247,6 +249,14 @@ if(${use_prov_client} OR (${use_prov_client_core} AND ${run_e2e_tests}))
         PUBLIC
             parson
             prov_auth_client
+    )
+
+    install(TARGETS prov_device_ll_client
+            EXPORT azure_prov_sdkTargets
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
 
 endif()
