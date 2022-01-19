@@ -58,7 +58,45 @@ multithreaded API is that the calls to DoWork are abstracted away from your code
 #endif // SET_TRUSTED_CERT_IN_SAMPLES
 
 /* Paste in your device connection string  */
-static const char* connectionString = "[device connection string]";
+static const char* connectionString = "HostName=foo-hub.azure-devices.net;DeviceId=foo-rsa;x509=true";
+
+static const char* device_cert =
+"-----BEGIN CERTIFICATE-----\n"
+"MIIDBTCCAe2gAwIBAgIUcOh23wa7WBGYTEUZwfPqISHt9WswDQYJKoZIhvcNAQEL\n"
+"BQAwEjEQMA4GA1UEAwwHZm9vLXJzYTAeFw0yMjAxMTkyMjIzMjFaFw0yMjAyMTgy\n"
+"MjIzMjFaMBIxEDAOBgNVBAMMB2Zvby1yc2EwggEiMA0GCSqGSIb3DQEBAQUAA4IB\n"
+"DwAwggEKAoIBAQDEPUu57/JpMMlkouBWfmNRfLOINbaFcYdvX3Qt0UZmGza+tZ52\n"
+"Wl3UcAQpjFbOcdH/PA0oZTRETg0BwYlYepzILEYdtYIWsZ6hXPUYYIfudBwpuG1F\n"
+"N/drsRpe7Bde8syJAChQRCHyENnoWoW8SLIsprStK39C8citD8+ao9Nv27p7tRyC\n"
+"euAi7A+97JtqcrF8qCpav5oO5pvE653A7ili6ApQjp8/crfOVlbSOxAzzcqXSngP\n"
+"<redacted>\n"
+"LVVIvBYhc0+WuG0DKtZ2qu+Ba158o/i02hVgA+EXpxE0CmgRegsGZKW8Pgttjdvt\n"
+"7d7/EPg38/bvzXR0I8CG98fvTbMGiUMghMsGSdgAGLUrxj5qRnKwLj4PYOI7Ji3H\n"
+"4fVCTcvGXCqUeoM+kpeIpRVSDqkuIi/4H+N1pleQSwmvjBSk2qGlt034GLKoU40x\n"
+"+tgpzxH3oCNg9M7KvPKHqa4KYJ+K2c+gzr47qkCRJZtCb4YCaKuU0MNUG59PjyZm\n"
+"e7K/QuWm1jRhu1EaAtITFUJFcbY+1Hb8cveMqHPp/fA3wMqWZMKwS4Y8iP9uQ5KR\n"
+"lI3rf3O/dLGx\n"
+"-----END CERTIFICATE-----";
+
+static const char* device_key =
+"-----BEGIN RSA PRIVATE KEY-----\n"
+"MIIEowIBAAKCAQEAxD1Lue/yaTDJZKLgVn5jUXyziDW2hXGHb190LdFGZhs2vrWe\n"
+"dlpd1HAEKYxWznHR/zwNKGU0RE4NAcGJWHqcyCxGHbWCFrGeoVz1GGCH7nQcKbht\n"
+"RTf3a7EaXuwXXvLMiQAoUEQh8hDZ6FqFvEiyLKa0rSt/QvHIrQ/PmqPTb9u6e7Uc\n"
+"gnrgIuwPveybanKxfKgqWr+aDuabxOudwO4pYugKUI6fP3K3zlZW0jsQM83Kl0p4\n"
+"D2KTzZOACG50Gdf+9Vc2PpOYUka5FGOEGC4htc3o7GncQ7o4fJCZI9Est8MLYMrZ\n"
+"rqGCgteGxh5tuyRh80Gh2gcci/xl4W+c+9XKswIDAQABAoIBAD1qrauY1DZlxXIQ\n"
+"o8OONMlJDOtBXElxWaDasAKy76R/Oef/8YM7DwiwsizKtlRQPRfzlG6jFfOWte1p\n"
+"w/GEFlNzv9IGf5tYpbv82txxQbm4byQDi3dRZ8c1m3o/y6S0upzaBsPwPuuCqKBW\n"
+"<redacted>\n"
+"rbwzh5rbTivcCZD4oEjnUTkCgYA/9q7yZdXK2viS9vafqmHJo5b1/SXrWBlK0nPS\n"
+"LYgwlzpj0wY1BA8YdiOb2PPSf8fcK4rbjQqhAVGihEK5S1dkr3rYLP7bg2PfLj8+\n"
+"25DLnntt9XeV9J1yjEBfqqSf/fBLHRNL7/k1YB1w6vK69CEXzrcwEXBZ2hTcWriv\n"
+"lZVBjQKBgHhgWozIo/1M8d5KTnRQtpwKOkqO7gbs+ipTQAMcBiRP2jFGSFcRZcyF\n"
+"ZafF3AKQEYVPXlym4uJRf8jyqpfryU3J5ttNINfnhfGA2zh9hVxBNqKW98EOMnRj\n"
+"TvVqCgh2Xdz0YxKkVL6J+mNqjJiYafhCVqWB122JWAUJQpc/pAg4\n"
+"-----END RSA PRIVATE KEY-----";
+
 
 static bool g_continueRunning = true;
 int g_interval = 10000;  // 10 sec send interval initially
@@ -329,6 +367,9 @@ int main(void)
         // Without the SetOption, the delay defaults to 1 ms.
         tickcounter_ms_t ms_delay = 10;
         (void)IoTHubDeviceClient_SetOption(device_handle, OPTION_DO_WORK_FREQUENCY_IN_MS, &ms_delay);
+
+        (void)IoTHubDeviceClient_SetOption(device_handle, OPTION_X509_CERT, device_cert);
+        (void)IoTHubDeviceClient_SetOption(device_handle, OPTION_X509_PRIVATE_KEY, device_key);
 
 #ifdef SET_TRUSTED_CERT_IN_SAMPLES
         // Setting the Trusted Certificate. This is only necessary on systems without
