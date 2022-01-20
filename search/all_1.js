@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['building_20applications_20using_20vcpkg_20for_20c_20sdk_2',['Building applications using vcpkg for C SDK',['../md__home_runner_work_azure_iot_sdk_c_azure_iot_sdk_c_doc_setting_up_vcpkg.html',1,'']]]
+  ['componentname_1',['componentName',['../structIOTHUB__CLIENT__DESERIALIZED__PROPERTY__TAG.html#aada49a0e160c7b4295e9b359441ef000',1,'IOTHUB_CLIENT_DESERIALIZED_PROPERTY_TAG']]]
 ];

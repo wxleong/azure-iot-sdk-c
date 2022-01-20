@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getting_20start_20with_20iothub_20c_20sdk_20on_20ios_13',['Getting start with IoTHub C SDK on iOS',['../md__home_runner_work_azure_iot_sdk_c_azure_iot_sdk_c_doc_getting_started_with_ios.html',1,'']]]
+  ['name_260',['name',['../structIOTHUB__CLIENT__REPORTED__PROPERTY__TAG.html#a5d6e34ea4012355f39fa32a33c003ce5',1,'IOTHUB_CLIENT_REPORTED_PROPERTY_TAG::name()'],['../structIOTHUB__CLIENT__WRITABLE__PROPERTY__RESPONSE__TAG.html#a82ea46daf1b5d0ea185276eacc9ccc2a',1,'IOTHUB_CLIENT_WRITABLE_PROPERTY_RESPONSE_TAG::name()'],['../structIOTHUB__CLIENT__DESERIALIZED__PROPERTY__TAG.html#a277f37cf512f1f16c83d4368a28f298e',1,'IOTHUB_CLIENT_DESERIALIZED_PROPERTY_TAG::name()']]]
 ];

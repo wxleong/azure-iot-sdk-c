@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "tickcounter.h": "c",
+        "xlogging.h": "c"
+    }
+}

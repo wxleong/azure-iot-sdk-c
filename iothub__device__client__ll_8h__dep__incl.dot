@@ -1,0 +1,9 @@
+digraph "iothub_device_client_ll.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="iothub_device_client_ll.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="APIs that allow a user (usually a device) to communicate with an Azure IoT Hub."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="iothub_device_client.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__device__client_8h.html",tooltip="Extends the IoTHubDeviceClient_LL with additional features."];
+}

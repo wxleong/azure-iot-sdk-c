@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['structversion_489',['structVersion',['../structIOTHUB__CLIENT__REPORTED__PROPERTY__TAG.html#a7b79e5ae8e6a4f57154dca9aaff75f38',1,'IOTHUB_CLIENT_REPORTED_PROPERTY_TAG::structVersion()'],['../structIOTHUB__CLIENT__WRITABLE__PROPERTY__RESPONSE__TAG.html#af891b2db7a64511dd3c6def7f31f5f04',1,'IOTHUB_CLIENT_WRITABLE_PROPERTY_RESPONSE_TAG::structVersion()'],['../structIOTHUB__CLIENT__DESERIALIZED__PROPERTY__TAG.html#a2d2bd2a2aca1eb4cada78d505a1b20a7',1,'IOTHUB_CLIENT_DESERIALIZED_PROPERTY_TAG::structVersion()']]]
+];

@@ -1,0 +1,33 @@
+digraph "iothub_message.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="iothub_message.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The IoTHub_Message component encapsulates one message that can be transferred by an IoT hub client."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="iothub_client_core\l_common.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__client__core__common_8h.html",tooltip="Shared enums, structures, and callback functions for IoT Hub client."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="iothub_client_core_ll.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__client__core__ll_8h_source.html",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="iothub_client.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__client_8h.html",tooltip="Extends the IoTHubClient_LL with additional features."];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="iothub_client_core.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__client__core_8h_source.html",tooltip=" "];
+  Node5 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="iothub_device_client.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__device__client_8h.html",tooltip="Extends the IoTHubDeviceClient_LL with additional features."];
+  Node5 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="iothub_module_client.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__module__client_8h.html",tooltip="Extends the IoTHubModuleClient_LL module with additional features."];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="iothub_device_client_ll.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__device__client__ll_8h.html",tooltip="APIs that allow a user (usually a device) to communicate with an Azure IoT Hub."];
+  Node8 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="iothub_client_ll.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__client__ll_8h.html",tooltip="APIs that allow a user (usually a device) to communicate with an Azure IoT Hub."];
+  Node9 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="iothub_client_properties.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__client__properties_8h.html",tooltip="APIs that serialize and deserialize properties modeled with DTDLv2."];
+  Node2 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="iothub_module_client_ll.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$iothub__module__client__ll_8h.html",tooltip="APIs that allow a user to communicate with an Azure IoT Hub."];
+  Node11 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}
