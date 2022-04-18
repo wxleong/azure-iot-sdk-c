@@ -28,7 +28,7 @@ and removing calls to _DoWork will yield the same results. */
 //#define SAMPLE_HTTP
 
 // If using an OpenSSL ENGINE uncomment and modify the line below
-//#define SAMPLE_OPENSSL_ENGINE "pkcs11"
+#define SAMPLE_OPENSSL_ENGINE "tpm2tss"
 
 #ifdef SAMPLE_MQTT
     #include "iothubtransportmqtt.h"
@@ -68,6 +68,9 @@ static const char* x509certificate =
 "dkyVdoGPCXc=""\n"
 "-----END CERTIFICATE-----";
 
+#ifdef SAMPLE_OPENSSL_ENGINE
+static const char* x509privatekey = "0x81000001";
+#else
 static const char* x509privatekey =
 "-----BEGIN RSA PRIVATE KEY-----""\n"
 "MIIEpQIBAAKCAQEA0zKK+Uu5I0nXq2V6+2gbdCsBXZ6j1uAgU/clsCohEAek1T8v""\n"
@@ -77,6 +80,7 @@ static const char* x509privatekey =
 "SaqVID4EAUgUqFDw0UO6SKLT+HyFjOr5qdHkfAmRzwE/0RBN69g2qLDN3Km1Px/k""\n"
 "xyJyxc700uV1eKiCdRLRuCbUeecOSZreh8YRIQQXoG8uotO5IttdVRc=""\n"
 "-----END RSA PRIVATE KEY-----";
+#endif
 
 #ifdef SAMPLE_OPENSSL_ENGINE
 static const char* opensslEngine = SAMPLE_OPENSSL_ENGINE;
